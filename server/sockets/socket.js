@@ -30,12 +30,14 @@ client.on('entrarChat',(usuario,callback)=>{
 });
 
 
-client.on('crearMensaje',(data)=>{
+client.on('crearMensaje',(data,callback)=>{
 
     let perona  = usuarios.getpersona(client.id);
     let mensaje = crearMensaje(perona.nombre, data.mensaje);
     client.broadcast.to(perona.sala).emit('crearMensaje',mensaje);
-})
+
+    callback(mensaje);
+}) 
 
 
 
@@ -63,9 +65,6 @@ client.on('mensajePrivado', data=>{
     
 
 })
-
-
-
 
 
 
